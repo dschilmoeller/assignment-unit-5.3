@@ -15,7 +15,7 @@ Update the `3-music-collection.js` file to do the following:
 
 ### Required Features
 
-- Create a variable `collection` that starts as an empty array.
+XX - Create a variable `collection` that starts as an empty array.
 
 - Add a function named `addToCollection`. This function should:
   - Take in the album's `title`, `artist`, `yearPublished` as input parameters
