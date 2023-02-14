@@ -2,20 +2,27 @@ console.log('***** Music Collection *****')
 
 let collection = [];
 
+// Respectfully, I'm not putting in the full track list for all the albums unless this goes to production. 
+// I believe the below will be sufficient to verify the code works.
+let europopTracks = [['Too Much of Heaven', 319],['Europop', 328]]
+let texasFloodTracks = [['Love Struck Baby',149], ['Pride and Joy',219],['Texas Flood',321],['Tell Me',168],['Testify',200]]
+
+
 //addToCollection Function
-function addToCollection (title, artist, yearPublished) {
+function addToCollection (title, artist, yearPublished, trackArray) {
     let newAlbum = {
         albumTitle: title,
         albumArtist: artist,
-        albumYearPublished: yearPublished
+        albumYearPublished: yearPublished,
+        tracks: trackArray // found this in the docs in VSCode: "declare const name: void;" - doesn't like it!
     }
     collection.push(newAlbum);
     return newAlbum;
 }
 
 console.log('--- Adding Music to Collection Start ---')
-console.log(addToCollection('Europop','Eiffel 65',1999))
-console.log(addToCollection('Texas Flood', 'Stevie Ray Vaughn', 1983))
+console.log(addToCollection('Europop','Eiffel 65',1999,europopTracks))
+console.log(addToCollection('Texas Flood', 'Stevie Ray Vaughn', 1983,texasFloodTracks))
 console.log(addToCollection('Le Pop', 'Katzenjammer', 2008))
 console.log(addToCollection('A Kiss Before You Go','Katzenjammer', 2011))
 console.log(addToCollection('Rockland','Katzenjammer',2015))
@@ -61,15 +68,26 @@ console.log('Searching for Billy Idol', findByArtist('Billy Idol'));
 function search(searchInput) {
     let searchArray = [];
     for (let i=0; i<collection.length; i++) {
-        if (searchInput.artist === collection[i].albumArtist && searchInput.year === collection[i].albumYearPublished) {
+        if (searchInput.artist == collection[i].albumArtist && searchInput.year == collection[i].albumYearPublished) {
             searchArray.push(collection[i]);
-            console.log[searchArray];
+            console.log("Pushing an album Dave.");      
+        // This feels right at first, but will always return the full collection if ANY entry DOESN'T match both.
+            // } else {
+        //     return collection;
         }
-    } return searchArray;
+    } if (searchArray === [] ) {
+        return collection;
+    } else {
+        return searchArray;
+    }
 } // end search
 
 console.log('--- Stretch Goal 1 ---')
+
 console.log('searching for requested information...', search({ artist: 'Ray Charles', year: 1957 })) // unclear why console is returning [object Object] when included
 // in the function with a plus (+), but returns an array when using a comma (,)
 console.log('searching for requested information...', search({ artist: 'Ray Charles', year: 1960 }))
-console.log('searching for requested information...', search({ artist: 'Ray Charles', year: 1957 }))
+
+
+//Stretch Goal 2
+//Inserted into above code!
