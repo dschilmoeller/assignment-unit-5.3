@@ -11,9 +11,9 @@ let texasFloodTracks = [['Love Struck Baby',149], ['Pride and Joy',219],['Texas 
 //addToCollection Function
 function addToCollection (title, artist, yearPublished, trackArray) {
     let newAlbum = {
-        albumTitle: title,
-        albumArtist: artist,
-        albumYearPublished: yearPublished,
+        title: title,
+        artist: artist,
+        yearPublished: yearPublished,
         tracks: trackArray // found this in the docs in VSCode: "declare const name: void;" - doesn't like it!
     }
     collection.push(newAlbum);
@@ -28,7 +28,7 @@ console.log(addToCollection('A Kiss Before You Go','Katzenjammer', 2011))
 console.log(addToCollection('Rockland','Katzenjammer',2015))
 console.log(addToCollection('Tonight Alright','Spiderbait',2004))
 console.log(addToCollection('Unknown Album', 'Ray Charles', 1957))
-console.log(addToCollection('Unknown Album 2','Ray Charles', 1957))
+console.log(addToCollection('Unknown Album 2','Ray Charles', 1959))
 //console.log(collection)
 
 
@@ -36,13 +36,13 @@ console.log(addToCollection('Unknown Album 2','Ray Charles', 1957))
 function showCollection(array) {
     console.log("There are " + array.length + " items in the array.")
     for (album of array) {
-        console.log( (album.albumTitle) + ' by ' + (album.albumArtist) + ', published in ' + (album.albumYearPublished))
+        console.log( (album.title) + ` by ` + (album.artist) + `, published in ` + (album.yearPublished) + 'tracks' + (album.tracks));
     }
 }
 
+
 console.log('--- Show Collection Output Start ---')
 showCollection(collection);
-
 
 //findByArtist Function
 function findByArtist(artist) {
@@ -50,7 +50,7 @@ function findByArtist(artist) {
     for (let i=0; i < collection.length; i++) {
         // testing only, clutters up output otherwise.
         //console.log('looking at', collection[i] );
-        if (collection[i].albumArtist === artist) {
+        if (collection[i].artist === artist) {
             findByArtistArray.push(collection[i]);
         } 
     } return findByArtistArray;
@@ -65,29 +65,60 @@ console.log('Searching for Billy Idol', findByArtist('Billy Idol'));
 
 
 // Stretch Goal 1
+// This works with the given search, but is not very flexible.
+//     for (let i=0; i<collection.length; i++) {
+//         if (searchInput.artist === collection[i].albumArtist && searchInput.year === collection[i].albumYearPublished) {
+//             searchArray.push(collection[i]);
+//             console.log("Pushing an album Dave.");      
+//         // This feels right at first, but will always return the full collection if ANY entry DOESN'T match both.
+//             // } else {
+//         //     return collection;
+//         }
+//     } if (searchArray === [] ) {
+//         return collection;
+//     } else {
+//         return searchArray;
+//     }
+// } // end search
+
+
+// It seems like to make a proper function we need to do a few things.
+// 1 - somehow ignore parameters that are not passed (in example, album name for instance)
+// 2 - check parameters that do exist against the array
+// 3 - return items in the array that pass the test.
+
 function search(searchInput) {
-    let searchArray = [];
-    for (let i=0; i<collection.length; i++) {
-        if (searchInput.artist == collection[i].albumArtist && searchInput.year == collection[i].albumYearPublished) {
-            searchArray.push(collection[i]);
-            console.log("Pushing an album Dave.");      
-        // This feels right at first, but will always return the full collection if ANY entry DOESN'T match both.
-            // } else {
-        //     return collection;
+    collection.filter(obj => {
+        if (obj.artist === searchInput.artist) {
+            console.log('nice one');
+        } else {
+            console.log('damnit.')
         }
-    } if (searchArray === [] ) {
-        return collection;
-    } else {
-        return searchArray;
-    }
-} // end search
+    })
+}
+    
+
 
 console.log('--- Stretch Goal 1 ---')
 
-console.log('searching for requested information...', search({ artist: 'Ray Charles', year: 1957 })) // unclear why console is returning [object Object] when included
-// in the function with a plus (+), but returns an array when using a comma (,)
-console.log('searching for requested information...', search({ artist: 'Ray Charles', year: 1960 }))
-
+console.log('searching for requested information...')
+console.log(search({artist: 'Ray Charles', year: 1957 })) // should return 1 item
+console.log(search({artist: 'Ray Charles'})); // should return 2 items
+//console.log(search(1999))
 
 //Stretch Goal 2
 //Inserted into above code!
+
+
+// const fruits = ["apple", "banana", "grapes", "mango", "orange"];
+// function filterItems(query) {
+//   return fruits.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+// }
+
+// console.log(filterItems("ap")); // ['apple', 'grapes']
+// console.log(filterItems("an")); // ['banana', 'mango', 'orange']
+
+
+// array.filter() - 
+// array.includes - first determine if array includes value. 
+
