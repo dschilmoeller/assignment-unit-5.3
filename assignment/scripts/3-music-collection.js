@@ -31,12 +31,19 @@ function showCollection(array) {
 
 console.log(showCollection(collection));
 
-// I am not aware of a way to include collection array in the below without specifying it as part of the function.
-// function findByArtist(artist, collection) {
-//     let searchArray = [];
-//     for (let i=0; i < collection.length; i++) {
-//         if (collection[i] === artist) {
-//             searchArray.push(collection[i].albumArtist);
-//         } 
-//     } 
-// }
+
+function findByArtist(artist) {
+    let searchArray = [];
+    for (let i=0; i < collection.length; i++) {
+        // testing only, clutters up output otherwise.
+        //console.log('looking at', collection[i] );
+        if (collection[i].albumArtist === artist) {
+            searchArray.push(collection[i]);
+        } 
+    } return searchArray;
+} // end findByArtist
+//positioning of the [i]'s is very important and tricky!!
+
+console.log('Searching for Stevie Ray Vaugh', findByArtist('Stevie Ray Vaughn'));
+console.log('Searching for Katzenjammmer', findByArtist('Katzenjammer'));
+console.log('Searching for Billy Idol', findByArtist('Billy Idol'));
