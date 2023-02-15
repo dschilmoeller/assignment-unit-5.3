@@ -38,8 +38,10 @@ function showCollection(array) {
         for (album of array) {
             console.log( (album.title) + ` by ` + (album.artist) + `, published in ` + (album.yearPublished) + `:`);
             if ( album.tracks.length > 0 ) {
+                console.log(album.tracks.length)
                 for (i=0; i<album.tracks.length; i++) {
-                console.log((i+1) + '. ' + album.tracks[i] + ': ' + album.tracks[i+1] + ' seconds')
+                let numbox = 0;
+                console.log((i+1) + '. ' + album.tracks[i][0] + ': ' + album.tracks[i][1] + ' seconds')
             } 
         }
     }
