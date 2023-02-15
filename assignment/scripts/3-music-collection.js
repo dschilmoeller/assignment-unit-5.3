@@ -35,14 +35,21 @@ console.log(addToCollection('Unknown Album 2','Ray Charles', 1959))
 //showCollection Function
 function showCollection(array) {
     console.log("There are " + array.length + " items in the array.")
-    for (album of array) {
-        console.log( (album.title) + ` by ` + (album.artist) + `, published in ` + (album.yearPublished) + 'tracks' + (album.tracks));
+        for (album of array) {
+            console.log( (album.title) + ` by ` + (album.artist) + `, published in ` + (album.yearPublished) + `:`);
+            if ( album.tracks.length > 0 ) {
+                for (i=0; i<album.tracks.length; i++) {
+                console.log((i+1) + '. ' + album.tracks[i] + ': ' + album.tracks[i+1] + ' seconds')
+            } 
+        }
     }
 }
 
-
 console.log('--- Show Collection Output Start ---')
 showCollection(collection);
+
+console.log('--- testing individual tracks start ---')
+console.log(collection[0].tracks[0])
 
 //findByArtist Function
 function findByArtist(artist) {
