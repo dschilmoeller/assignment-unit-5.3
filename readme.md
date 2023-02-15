@@ -59,7 +59,7 @@ X    - If no results are found, return an empty array.
 X    - If there is no search object or an empty search object provided as input, then return all albums in the `collection`.
 
 X - Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:
-  - Update the `addToCollection` function to also take an input parameter for the array of tracks.
+X - Update the `addToCollection` function to also take an input parameter for the array of tracks.
   - Update `search` to allow a `trackName` search criteria.
 X  - Update the `showCollection` function to display the list of tracks for each album with its name and duration.
 ```

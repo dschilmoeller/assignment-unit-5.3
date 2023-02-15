@@ -51,8 +51,9 @@ function showCollection(array) {
 console.log('--- Show Collection Output Start ---')
 showCollection(collection);
 
-console.log('--- testing individual tracks start ---')
-console.log(collection[0].tracks[0])
+//this was for tracking down individual tracks.
+//console.log('--- testing individual tracks start ---')
+//console.log(collection[0].tracks[0])
 
 //findByArtist Function
 function findByArtist(artist) {
@@ -66,15 +67,19 @@ function findByArtist(artist) {
     } return findByArtistArray;
 } // end findByArtist
 //positioning of the [i]'s is very important and tricky!!
+// I reread the above and laugh after the last stretch goal.
+
 console.log('--- findByArtist Output Start ---')
 
-console.log('Searching for Stevie Ray Vaugh', findByArtist('Stevie Ray Vaughn'));
-console.log('Searching for Katzenjammmer', findByArtist('Katzenjammer'));
-console.log('Searching for Billy Idol', findByArtist('Billy Idol'));
+console.log('Searching for Stevie Ray Vaugh', findByArtist('Stevie Ray Vaughn')); // should output array with 1 entry
+console.log('Searching for Katzenjammmer', findByArtist('Katzenjammer')); // should output array with 3 entries
+console.log('Searching for Billy Idol', findByArtist('Billy Idol')); // should output empty array
 
 
 
 // Stretch Goal 1
+
+// -- INTERNAL NOTES - PLEASE IGNORE -- //
 // This works with the given search, but is not very flexible.
 //     for (let i=0; i<collection.length; i++) {
 //         if (searchInput.artist === collection[i].albumArtist && searchInput.year === collection[i].albumYearPublished) {
@@ -91,22 +96,30 @@ console.log('Searching for Billy Idol', findByArtist('Billy Idol'));
 //     }
 // } // end search
 
+// this logs correctly but don't know what else to do with it.
+// function search(searchInput) {
+//     collection.filter(obj => {
+//         if (obj.artist === searchInput.artist) {
+//             console.log('nice one');
+//         } else {
+//             console.log('dangit.')
+//         }
+//     })
+// }
+// -- END INTERNAL NOTES -- //
 
-// It seems like to make a proper function we need to do a few things.
-// 1 - somehow ignore parameters that are not passed (in example, album name for instance)
-// 2 - check parameters that do exist against the array
-// 3 - return items in the array that pass the test.
+// most robust so far. !propertyName tells it to ignore undefined properties.
+// that filter thing ended up pretty long - hopefully this is the proper formatting for readability.
 
 function search(searchInput) {
-    collection.filter(obj => {
-        if (obj.artist === searchInput.artist) {
-            console.log('nice one');
-        } else {
-            console.log('damnit.')
-        }
-    })
-}
-    
+    let results = collection.filter(obj => (obj.title === searchInput.title || !searchInput.title)
+    && (obj.artist === searchInput.artist || !searchInput.artist) 
+    && (obj.yearPublished === searchInput.year || !searchInput.year)
+    && (obj.tracks === searchInput.track || !searchInput.track)); // not currently working.
+    if (results.length > 0) {
+        return results;
+    } else return collection;
+}    
 
 
 console.log('--- Stretch Goal 1 ---')
@@ -114,21 +127,13 @@ console.log('--- Stretch Goal 1 ---')
 console.log('searching for requested information...')
 console.log(search({artist: 'Ray Charles', year: 1957 })) // should return 1 item
 console.log(search({artist: 'Ray Charles'})); // should return 2 items
-//console.log(search(1999))
+console.log(search({artist: 'Dave Matthews Band'})); // should return collection
+console.log(search({year: 1999})); // should return 1 item
+console.log(search({year: 2023})); // should return collection
+console.log(search({title: 'Le Pop'})); // should return 1 item
+console.log(search({title: 'Insomniac'})); // should return collection
+console.log(search({artist: 'Katzenjammer', year: 2011, title: 'A Kiss Before You Go'})) // should return 1 item
+console.log(search({track: 'Pride and Joy'})); // should return 1 item
 
 //Stretch Goal 2
 //Inserted into above code!
-
-
-// const fruits = ["apple", "banana", "grapes", "mango", "orange"];
-// function filterItems(query) {
-//   return fruits.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
-// }
-
-// console.log(filterItems("ap")); // ['apple', 'grapes']
-// console.log(filterItems("an")); // ['banana', 'mango', 'orange']
-
-
-// array.filter() - 
-// array.includes - first determine if array includes value. 
-
