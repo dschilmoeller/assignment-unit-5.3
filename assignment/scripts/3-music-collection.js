@@ -41,7 +41,6 @@ function showCollection(array) {
                 console.log("No tracks available.")
             } else if ( album.tracks.length > 0 ) {
                 for (i=0; i<album.tracks.length; i++) {
-                let numbox = 0;
                 console.log((i+1) + '. ' + album.tracks[i][0] + ': ' + album.tracks[i][1] + ' seconds')
                 } 
             }
@@ -85,7 +84,8 @@ console.log('Searching for Billy Idol', findByArtist('Billy Idol')); // should o
 //         if (searchInput.artist === collection[i].albumArtist && searchInput.year === collection[i].albumYearPublished) {
 //             searchArray.push(collection[i]);
 //             console.log("Pushing an album Dave.");      
-//         // This feels right at first, but will always return the full collection if ANY entry DOESN'T match both.
+//         // This felt right at first, but will always return the full collection if ANY entry DOESN'T match both.
+//         // ergo the else needs to go, er, elsewhere.
 //             // } else {
 //         //     return collection;
 //         }
@@ -96,7 +96,7 @@ console.log('Searching for Billy Idol', findByArtist('Billy Idol')); // should o
 //     }
 // } // end search
 
-// this logs correctly but don't know what else to do with it.
+// this logs correctly but don't know what else to do with it atm frankly.
 // function search(searchInput) {
 //     collection.filter(obj => {
 //         if (obj.artist === searchInput.artist) {
@@ -109,13 +109,13 @@ console.log('Searching for Billy Idol', findByArtist('Billy Idol')); // should o
 // -- END INTERNAL NOTES -- //
 
 // most robust so far. !propertyName tells it to ignore undefined properties.
-// that filter thing ended up pretty long - hopefully this is the proper formatting for readability.
+// that filter thing ended up pretty long on a single line - hopefully this is the proper formatting for readability.
 
 function search(searchInput) {
     let results = collection.filter(obj => (obj.title === searchInput.title || !searchInput.title)
     && (obj.artist === searchInput.artist || !searchInput.artist) 
     && (obj.yearPublished === searchInput.year || !searchInput.year)
-    && (obj.tracks === searchInput.track || !searchInput.track)); // not currently working.
+    && (obj.tracks === searchInput.track || !searchInput.track)); // not currently working, always returns collection
     if (results.length > 0) {
         return results;
     } else return collection;
