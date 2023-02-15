@@ -37,15 +37,16 @@ function showCollection(array) {
     console.log("There are " + array.length + " items in the array.")
         for (album of array) {
             console.log( (album.title) + ` by ` + (album.artist) + `, published in ` + (album.yearPublished) + `:`);
-            if ( album.tracks.length > 0 ) {
-                console.log(album.tracks.length)
+            if  ( album.tracks == undefined ) {
+                console.log("No tracks available.")
+            } else if ( album.tracks.length > 0 ) {
                 for (i=0; i<album.tracks.length; i++) {
                 let numbox = 0;
                 console.log((i+1) + '. ' + album.tracks[i][0] + ': ' + album.tracks[i][1] + ' seconds')
-            } 
+                } 
+            }
         }
     }
-}
 
 console.log('--- Show Collection Output Start ---')
 showCollection(collection);
